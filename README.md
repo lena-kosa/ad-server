@@ -11,7 +11,8 @@ APIs usage example:
 2. GET http://localhost:8080/ad/phone  
 
 
-The application connects to running MySQL service.
+The application connects to running MySQL service.  
+The database will be populated on application startup by data.sql script.  
 
 MySQL configuration:  
 docker run --name my_sql_db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=ads -d -p 3306:3306 mysql/mysql-server  
