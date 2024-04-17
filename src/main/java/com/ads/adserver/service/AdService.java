@@ -53,7 +53,6 @@ public class AdService implements IAdService {
 
     // in real life we would create separate table for finished campaigns and move it there.
     // here finished campaign is just removed from the db for simplicity
-//    @Transactional
     protected void deleteCampaign(Campaign campaign) {
         LOGGER.info("Delete campaign {}", campaign);
         campaignRepository.delete(campaign);
