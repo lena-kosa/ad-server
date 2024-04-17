@@ -22,6 +22,9 @@ public class LocalCache {
     private final Map<String, Product> categoryProductMap = new HashMap<>();
     @Getter
     private Product maxBidProduct;
+
+    // handled like this for simplicity
+    // in real life would be updated from the products in db
     private final List<String> categories = List.of("phone", "gadget");
 
     public LocalCache(ProductRepository productRepository) {

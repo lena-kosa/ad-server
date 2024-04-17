@@ -1,8 +1,8 @@
 package com.ads.adserver.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class Campaign {
 
     @Id
@@ -33,4 +33,11 @@ public class Campaign {
             joinColumns=@JoinColumn(name="campaign_id", referencedColumnName="id"),
             inverseJoinColumns=@JoinColumn(name="product_id", referencedColumnName="id"))
     private List<Product> products;
+
+    public Campaign(Long id, String name, Instant startDate, BigDecimal bid) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.bid = bid;
+    }
 }

@@ -27,7 +27,7 @@ public class AdController {
     @PostMapping("/campaign")
     public ResponseEntity<CampaignDTO> createCampaign(@RequestBody CampaignDTO campaignDTO) {
         LOGGER.info("Create campaign {}", campaignDTO);
-        Campaign createdCampaign = adService.createCampaign(mapper.toCampaign(campaignDTO));
+        Campaign createdCampaign = adService.createCampaign(mapper.toCampaign(campaignDTO), campaignDTO.getProducts());
         return new ResponseEntity<>(mapper.toDto(createdCampaign), HttpStatus.OK);
     }
 
