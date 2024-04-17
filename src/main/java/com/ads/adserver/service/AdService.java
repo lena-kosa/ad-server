@@ -1,5 +1,6 @@
 package com.ads.adserver.service;
 
+import com.ads.adserver.cache.LocalCache;
 import com.ads.adserver.domain.Campaign;
 import com.ads.adserver.domain.Product;
 import com.ads.adserver.repository.CampaignRepository;
@@ -18,16 +19,19 @@ public class AdService implements IAdService {
 
     private final ProductRepository productRepository;
     private final CampaignRepository campaignRepository;
+    private final LocalCache localCache;
 
-    public AdService(ProductRepository productRepository, CampaignRepository campaignRepository) {
+    public AdService(ProductRepository productRepository, CampaignRepository campaignRepository, LocalCache localCache) {
         this.productRepository = productRepository;
         this.campaignRepository = campaignRepository;
+        this.localCache = localCache;
     }
 
     @Override
     @Transactional
     // todo - Transactional parameters
     public Campaign createCampaign(Campaign campaign, List<Long> productIds) {
+        LOGGER.info("Create campaign");
         for (Long productId : productIds) {
             productRepository.findById(productId).ifPresent(product -> campaign.getProducts().add(product));
         }
@@ -39,10 +43,7 @@ public class AdService implements IAdService {
 
     @Override
     public Product serveAd(String category) {
-        List<Product> maxBidByCategory = productRepository.findMaxBidByCategory(category);
-        if (maxBidByCategory != null && !maxBidByCategory.isEmpty()) {
-            return maxBidByCategory.get(0);
-        }
-        return null;
+        LOGGER.info("Serve ad for {}", category);
+        return localCache.getMaxBidByCategory(category);
     }
 }
