@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 @RestController
 public class AdController {
 
@@ -25,14 +28,14 @@ public class AdController {
     }
 
     @PostMapping("/campaign")
-    public ResponseEntity<CampaignDTO> createCampaign(@RequestBody CampaignDTO campaignDTO) {
+    public ResponseEntity<CampaignDTO> createCampaign(@Valid @RequestBody CampaignDTO campaignDTO) throws AdServerException {
         LOGGER.info("Create campaign {}", campaignDTO);
         Campaign createdCampaign = adService.createCampaign(mapper.toCampaign(campaignDTO), campaignDTO.getProducts());
         return new ResponseEntity<>(mapper.toDto(createdCampaign), HttpStatus.OK);
     }
 
     @GetMapping("/ad/{category}")
-    public ResponseEntity<ProductDTO> serveAd(@PathVariable String category) {
+    public ResponseEntity<ProductDTO> serveAd(@NotNull @PathVariable String category) {
         LOGGER.info("Serve ad for {}", category);
         Product product = adService.serveAd(category);
         return new ResponseEntity<>(mapper.toDto(product), HttpStatus.OK);

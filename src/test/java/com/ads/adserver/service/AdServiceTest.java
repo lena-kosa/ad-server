@@ -28,7 +28,7 @@ class AdServiceTest {
     }
 
     @Test
-    void serveAd_MaxBidForCategory() {
+    void testServeAd_MaxBidForCategoryAvailable() {
         String category = "phone";
         Product product = new Product(1L, "Iphone 15", "phone", "abc", new BigDecimal("3500"));
         Mockito.when(localCache.getMaxBidByCategory(category)).thenReturn(product);
@@ -38,7 +38,7 @@ class AdServiceTest {
     }
 
     @Test
-    void serveAd_MaxBid() {
+    void testServeAd_MaxBidForCategoryNotAvailable() {
         String category = "gadget";
         Product product = new Product(1L, "Iphone 15", "phone", "abc", new BigDecimal("3500"));
         Mockito.when(localCache.getMaxBidByCategory(category)).thenReturn(null);

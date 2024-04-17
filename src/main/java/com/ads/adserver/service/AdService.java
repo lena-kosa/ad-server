@@ -1,6 +1,7 @@
 package com.ads.adserver.service;
 
 import com.ads.adserver.cache.LocalCache;
+import com.ads.adserver.controller.AdServerException;
 import com.ads.adserver.domain.Campaign;
 import com.ads.adserver.domain.Product;
 import com.ads.adserver.repository.CampaignRepository;
@@ -33,14 +34,13 @@ public class AdService implements IAdService {
 
     @Override
     @Transactional
-    // todo - Transactional parameters
-    public Campaign createCampaign(Campaign campaign, List<Long> productIds) {
+    public Campaign createCampaign(Campaign campaign, List<Long> productIds) throws AdServerException {
         LOGGER.info("Create campaign");
         for (Long productId : productIds) {
             productRepository.findById(productId).ifPresent(product -> campaign.getProducts().add(product));
         }
         if (campaign.getProducts().isEmpty()) {
-            return null;
+            throw new AdServerException("Campaign should contain existing products");
         }
         Campaign createdCampaign = campaignRepository.save(campaign);
         threadPoolTaskScheduler.schedule(() -> deleteCampaign(createdCampaign),

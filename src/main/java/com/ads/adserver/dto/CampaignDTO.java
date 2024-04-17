@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -13,15 +14,17 @@ import java.util.List;
 @NoArgsConstructor
 public class CampaignDTO {
     private Long id;
-    private String name;
-    private Instant startDate;
-    private BigDecimal bid;
-    private List<Long> products;
 
-    public CampaignDTO(Long id, String name, Instant startDate, BigDecimal bid) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.bid = bid;
-    }
+    @NotBlank(message = "Campaign name should be provided")
+    private String name;
+
+    @NotNull(message = "Campaign start date should be provided")
+    @FutureOrPresent(message = "Campaign start date should be today or in the future")
+    private Instant startDate = Instant.now();
+
+    @PositiveOrZero(message = "Campaign bid should be non negative number")
+    private BigDecimal bid;
+
+    @NotEmpty(message = "Campaign should contain products")
+    private List<Long> products;
 }
