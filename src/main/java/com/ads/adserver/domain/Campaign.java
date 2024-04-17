@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +26,11 @@ public class Campaign {
 
     @Column(nullable = false)
     private BigDecimal bid;
+
+    @ManyToMany
+    @JoinTable(
+            name="campaign_product",
+            joinColumns=@JoinColumn(name="campaign_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="product_id", referencedColumnName="id"))
+    private List<Product> products;
 }
