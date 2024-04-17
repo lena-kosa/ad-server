@@ -17,4 +17,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             nativeQuery = true)
     List<Product> findMaxBidByCategory(@Param("category") String category);
 
+    @Query(value = "SELECT p.id, p.title, p.category, p.serial_number, p.price " +
+            "FROM (product p JOIN campaign_product cp ON p.id=cp.product_id) " +
+            "JOIN campaign c ON c.id=cp.campaign_id ORDER BY bid DESC LIMIT 1",
+            nativeQuery = true)
+    List<Product> findMaxBid();
+
 }

@@ -44,6 +44,10 @@ public class AdService implements IAdService {
     @Override
     public Product serveAd(String category) {
         LOGGER.info("Serve ad for {}", category);
-        return localCache.getMaxBidByCategory(category);
+        Product product = localCache.getMaxBidByCategory(category);
+        if (product != null) {
+            return product;
+        }
+        return localCache.getMaxBidProduct();
     }
 }
