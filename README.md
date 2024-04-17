@@ -1,4 +1,17 @@
-The application will try to connect to MySQL service.
+Ad Server is a Spring Boot aplication running on port 8080.  
+
+APIs usage example:  
+1. POST http://localhost:8080/campaign  
+{  
+    "name": "campaign 1",  
+    "startDate": "2024-04-16T19:01:12.924+03:00",  
+    "bid": 2.5,  
+    "products": [1, 2]  
+}  
+2. GET http://localhost:8080/ad/phone  
+
+
+The application connects to running MySQL service.
 
 MySQL configuration:  
 docker run --name my_sql_db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=ads -d -p 3306:3306 mysql/mysql-server  
