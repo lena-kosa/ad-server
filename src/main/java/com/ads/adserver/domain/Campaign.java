@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +33,7 @@ public class Campaign {
             name="campaign_product",
             joinColumns=@JoinColumn(name="campaign_id", referencedColumnName="id"),
             inverseJoinColumns=@JoinColumn(name="product_id", referencedColumnName="id"))
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Campaign(Long id, String name, Instant startDate, BigDecimal bid) {
         this.id = id;

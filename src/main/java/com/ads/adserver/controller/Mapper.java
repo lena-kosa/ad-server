@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Mapper {
     public CampaignDTO toDto(Campaign campaign) {
-        return new CampaignDTO(campaign.getId(), campaign.getName(), campaign.getStartDate(), campaign.getBid());
+        return new CampaignDTO(campaign.getId(), campaign.getName(), campaign.getStartDate(), campaign.getBid(),
+                campaign.getProducts().stream().map(Product::getId).toList());
     }
 
     public Campaign toCampaign(CampaignDTO campaignDTO) {
