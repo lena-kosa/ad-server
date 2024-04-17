@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(indexes = @Index(columnList = "id, bid DESC"))
 public class Campaign {
 
     @Id

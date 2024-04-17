@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(indexes = @Index(columnList = "id, category"))
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
