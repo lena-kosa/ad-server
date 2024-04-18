@@ -1,10 +1,10 @@
 package com.ads.adserver.dto;
 
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -18,7 +18,6 @@ public class CampaignDTO {
     @NotBlank(message = "Campaign name should be provided")
     private String name;
 
-    @NotNull(message = "Campaign start date should be provided")
     @FutureOrPresent(message = "Campaign start date should be today or in the future")
     private Instant startDate = Instant.now();
 

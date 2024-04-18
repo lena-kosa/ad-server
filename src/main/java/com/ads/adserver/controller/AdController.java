@@ -5,14 +5,14 @@ import com.ads.adserver.domain.Product;
 import com.ads.adserver.dto.CampaignDTO;
 import com.ads.adserver.dto.ProductDTO;
 import com.ads.adserver.service.AdService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @RestController
 public class AdController {

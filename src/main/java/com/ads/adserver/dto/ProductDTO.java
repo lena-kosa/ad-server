@@ -1,10 +1,10 @@
 package com.ads.adserver.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 @Data
@@ -21,6 +21,6 @@ public class ProductDTO {
     @NotBlank(message = "Product serial number should be provided")
     private String serialNumber;
 
-    @PositiveOrZero(message = "Product price should be positive number")
+    @PositiveOrZero(message = "Product price should be non negative number")
     private BigDecimal price;
 }
